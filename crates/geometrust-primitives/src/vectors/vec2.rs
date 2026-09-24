@@ -95,3 +95,33 @@ impl SubAssign for Vec2F64 {
         self.y -= rhs.y;
     }
 }
+
+impl Mul<f64> for Vec2F64 {
+    type Output = Self;
+
+    fn mul(self, rhs: f64) -> Self {
+        Self::new(self.x * rhs, self.y * rhs)
+    }
+}
+
+impl MulAssign<f64> for Vec2F64 {
+    fn mul_assign(&mut self, rhs: f64) {
+        self.x *= rhs;
+        self.y *= rhs;
+    }
+}
+
+impl Div<f64> for Vec2F64 {
+    type Output = Self;
+
+    fn div(self, rhs: f64) -> Self {
+        Self::new(self.x / rhs, self.y / rhs)
+    }
+}
+
+impl DivAssign<f64> for Vec2F64 {
+    fn div_assign(&mut self, rhs: f64) {
+        self.x /= rhs;
+        self.y /= rhs;
+    }
+}
