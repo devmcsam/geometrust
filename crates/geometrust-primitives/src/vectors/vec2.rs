@@ -64,6 +64,12 @@ impl Vec2F64 {
     pub const fn div_y(&self, y: f64) -> Self {
         Self::new(self.x, self.y / y)
     }
+
+    /// Dot product of two vectors.
+    #[inline]
+    pub const fn dot_product(&self, other: Self) -> f64 {
+        self.x * other.x + self.y * other.y
+    }
 }
 
 impl Add for Vec2F64 {
