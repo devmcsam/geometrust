@@ -1,0 +1,14 @@
+[package]
+name = "geometrust"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+readme = "README.md"
+categories = ["mathematics"]
+keywords = ["math", "geometry"]
+publish.workspace = true
+
+[dependencies]

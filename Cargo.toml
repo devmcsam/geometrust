@@ -1,0 +1,16 @@
+[workspace]
+members = ["crates/geometrust", "crates/geometrust-primitives"]
+resolver = "3"
+
+[workspace.package]
+readme = "README.md"
+license = "MIT"
+description = "Geometry solving in rust"
+repository = "https://github.com/devmcsam/geometrust"
+homepage = "https://github.com/devmcsam/geometrust"
+authors = ["Samuel McNally <sammcnally587@gmail.com>"]
+edition = "2024"
+version = "0.1.0"
+publish = true
+
+[workspace.dependencies]
