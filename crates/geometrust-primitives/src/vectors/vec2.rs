@@ -14,4 +14,12 @@ impl Vec2F64 {
     pub const fn new(x: f64, y: f64) -> Self {
         Self { x, y }
     }
+
+    pub const fn add_x(self, x: f64) -> Self {
+        Self::new(self.x + x, self.y)
+    }
+
+    pub const fn add_y(self, y: f64) -> Self {
+        Self::new(self.x, self.y + y)
+    }
 }
