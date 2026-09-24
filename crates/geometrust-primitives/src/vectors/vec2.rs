@@ -1,4 +1,5 @@
 //! Second dimension vectors and functions on vectors.
+use core::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
 
 /// A second-dimension vector specialized for 64 bit floating point numbers.
 #[derive(Copy, Clone, Debug, PartialEq)]
@@ -62,5 +63,35 @@ impl Vec2F64 {
     #[inline]
     pub const fn div_y(&self, y: f64) -> Self {
         Self::new(self.x, self.y / y)
+    }
+}
+
+impl Add for Vec2F64 {
+    type Output = Self;
+
+    fn add(self, rhs: Self) -> Self {
+        Self::new(self.x + rhs.x, self.y + rhs.y)
+    }
+}
+
+impl AddAssign for Vec2F64 {
+    fn add_assign(&mut self, rhs: Self) {
+        self.x += rhs.x;
+        self.y += rhs.y;
+    }
+}
+
+impl Sub for Vec2F64 {
+    type Output = Self;
+
+    fn sub(self, rhs: Self) -> Self {
+        Self::new(self.x - rhs.x, self.y - rhs.y)
+    }
+}
+
+impl SubAssign for Vec2F64 {
+    fn sub_assign(&mut self, rhs: Self) {
+        self.x -= rhs.x;
+        self.y -= rhs.y;
     }
 }
