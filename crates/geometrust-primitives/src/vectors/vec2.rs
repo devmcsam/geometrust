@@ -104,14 +104,40 @@ impl Vec2F64 {
         self.x * other.x + self.y * other.y
     }
 
+    /// Create a vector from an angle in radians.
     #[inline]
     pub fn from_angle(theta: f64) -> Self {
         Self::new(theta.cos(), theta.sin())
     }
 
+    /// Create a vector from polar coordinates.
     #[inline]
     pub fn from_polar(r: f64, theta: f64) -> Self {
         Self::new(r * theta.cos(), r * theta.sin())
+    }
+
+    /// Perform a component-wise addition of two vectors.
+    #[inline]
+    pub const fn add_components(&self, other: Self) -> Self {
+        Self::new(self.x + other.x, self.y + other.y)
+    }
+
+    /// Perform a component-wise subtraction of two vectors.
+    #[inline]
+    pub const fn sub_components(&self, other: Self) -> Self {
+        Self::new(self.x - other.x, self.y - other.y)
+    }
+
+    /// Perform a component-wise multiplication of two vectors.
+    #[inline]
+    pub const fn mul_components(&self, other: Self) -> Self {
+        Self::new(self.x * other.x, self.y * other.y)
+    }
+
+    /// Perform a component-wise division of two vectors.
+    #[inline]
+    pub const fn div_components(&self, other: Self) -> Self {
+        Self::new(self.x / other.x, self.y / other.y)
     }
 }
 
