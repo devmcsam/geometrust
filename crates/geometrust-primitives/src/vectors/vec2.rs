@@ -11,7 +11,9 @@ struct Vec2F64 {
 }
 
 impl Vec2F64 {
+    /// A `Vec2F64` with both components being 0.0
     pub const ZERO: Self = Self { x: 0.0, y: 0.0 };
+    /// A `Vec2F64` with both components being 1.0
     pub const ONE: Self = Self { x: 1.0, y: 1.0 };
 
     /// Create a new 2D vector.
