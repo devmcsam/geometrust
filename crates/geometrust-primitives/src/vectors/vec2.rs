@@ -11,10 +11,25 @@ struct Vec2F64 {
 }
 
 impl Vec2F64 {
+    pub const ZERO: Self = Self { x: 0.0, y: 0.0 };
+    pub const ONE: Self = Self { x: 1.0, y: 1.0 };
+
     /// Create a new 2D vector.
     #[inline]
     pub const fn new(x: f64, y: f64) -> Self {
         Self { x, y }
+    }
+
+    pub const fn splat(value: f64) -> Self {
+        Self::new(value, value)
+    }
+
+    pub const fn zero() -> Self {
+        Self::ZERO
+    }
+
+    pub const fn one() -> Self {
+        Self::ONE
     }
 
     /// Add a value to the x component of the vector.
