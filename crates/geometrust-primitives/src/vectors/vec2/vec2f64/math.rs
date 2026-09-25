@@ -19,4 +19,16 @@ impl Vec2F64 {
     pub fn length_squared(&self) -> f64 {
         self.x.powi(2) + self.y.powi(2)
     }
+
+    /// Find the distance between two vectors.
+    #[inline]
+    pub fn distance(&self, other: Self) -> f64 {
+        (self.x - other.x).hypot(self.y - other.y)
+    }
+
+    /// Find the distance squared between two vectors.
+    #[inline]
+    pub fn distance_squared(&self, other: Self) -> f64 {
+        (self.x - other.x).powi(2) + (self.y - other.y).powi(2)
+    }
 }
