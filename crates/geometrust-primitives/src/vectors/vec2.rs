@@ -38,6 +38,16 @@ impl Vec2F64 {
         Self::ONE
     }
 
+    #[inline]
+    pub const fn from_tuple(tup: (f64, f64)) -> Self {
+        Self::new(tup.0, tup.1)
+    }
+
+    #[inline]
+    pub const fn from_array(arr: [f64; 2]) -> Self {
+        Self::new(arr[0], arr[1])
+    }
+
     /// Add a value to the x component of the vector.
     #[inline]
     pub const fn add_x(&self, x: f64) -> Self {
@@ -90,6 +100,16 @@ impl Vec2F64 {
     #[inline]
     pub const fn dot_product(&self, other: Self) -> f64 {
         self.x * other.x + self.y * other.y
+    }
+
+    #[inline]
+    pub fn from_angle(theta: f64) -> Self {
+        Self::new(theta.cos(), theta.sin())
+    }
+
+    #[inline]
+    pub fn from_polar(r: f64, theta: f64) -> Self {
+        Self::new(r * theta.cos(), r * theta.sin())
     }
 }
 
