@@ -139,6 +139,18 @@ impl Vec2F64 {
     pub const fn div_components(&self, other: Self) -> Self {
         Self::new(self.x / other.x, self.y / other.y)
     }
+
+    /// Find the length or magnitude of the given vector.
+    #[inline]
+    pub fn length(&self) -> f64 {
+        self.x.hypot(self.y)
+    }
+
+    /// Find the squared length or magnitude of the given vector.
+    #[inline]
+    pub fn length_squared(&self) -> f64 {
+        self.x.powi(2) + self.y.powi(2)
+    }
 }
 
 impl Add for Vec2F64 {
