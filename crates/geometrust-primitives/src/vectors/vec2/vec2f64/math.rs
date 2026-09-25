@@ -31,4 +31,10 @@ impl Vec2F64 {
     pub fn distance_squared(&self, other: Self) -> f64 {
         (self.x - other.x).powi(2) + (self.y - other.y).powi(2)
     }
+
+    /// Find the absolute value of each component of the vector and return a new vector with each component.
+    #[inline]
+    pub fn abs(&self) -> Self {
+        Self::new(self.x.abs(), self.y.abs())
+    }
 }
