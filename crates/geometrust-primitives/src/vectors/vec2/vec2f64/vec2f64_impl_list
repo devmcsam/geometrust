@@ -1,0 +1,435 @@
+THIS IS AN AI GENERATED DOCUMENT AND IS SUBJECT TO ERRORS. PLEASE THINK BEFORE MAKING DECISIONS.
+
+Vec2 Implementation Checklist
+==============================
+
+Mark completed items by changing "[ ]" to "[X]".
+
+
+1. FOUNDATIONAL TYPE & CONSTRUCTION
+-----------------------------------
+
+[X] new(x, y)
+[X] splat(v)
+[X] zero()
+[X] one()
+[ ] unit_x()
+[ ] unit_y()
+[X] from_array([x, y])
+[ ] to_array()
+[X] from_tuple((x, y))
+[ ] to_tuple((x, y))
+
+
+2. RUST TRAITS & BASIC INTEGRATION
+----------------------------------
+
+[ ] Default
+[X] Clone
+[X] Copy
+[X] Debug
+[X] PartialEq
+[ ] Index<usize>
+[ ] IndexMut<usize>
+[ ] From<[T; 2]>
+[ ] Into<[T; 2]>
+[ ] From<(T, T)>
+[ ] Into<(T, T)>
+
+
+3. BASIC ARITHMETIC
+-------------------
+
+[X] Add
+[X] Sub
+[X] Mul<scalar>
+[X] Div<scalar>
+[ ] Neg
+[X] AddAssign
+[X] SubAssign
+[X] MulAssign<scalar>
+[ ] DivAssign
+
+
+4. COMPONENT OPERATIONS
+-----------------------
+
+[ ] min(other)
+[ ] max(other)
+[ ] min_element()
+[ ] max_element()
+[X] abs()
+[ ] signum()
+[ ] floor()
+[ ] ceil()
+[ ] round()
+[ ] trunc()
+[ ] fract()
+[X] component_mul(other)
+[X] component_div(other)
+[ ] recip()
+[ ] map(f)
+
+
+5. CORE VECTOR ALGEBRA
+----------------------
+
+[X] dot(other)
+[X] cross(other)
+[X] length_squared()
+[X] length()
+[X] distance_squared(other)
+[X] distance(other)
+
+
+6. NORMALIZATION
+----------------
+
+[ ] normalize()
+[ ] try_normalize()
+[ ] normalize_or_zero()
+[ ] normalize_or(fallback)
+
+
+7. 2D-SPECIFIC VECTOR OPERATIONS
+--------------------------------
+
+[ ] perp()
+[ ] perp_cw()
+[ ] rotate(angle)
+[ ] angle()
+[ ] angle_between(other)
+[ ] signed_angle_to(other)
+
+
+8. VECTOR DECOMPOSITION
+-----------------------
+
+[ ] project_onto(other)
+[ ] reject_from(other)
+
+
+9. GEOMETRIC VECTOR OPERATIONS
+------------------------------
+
+[ ] reflect(normal)
+[ ] refract(normal, eta)
+
+
+10. INTERPOLATION
+-----------------
+
+[ ] lerp(other, t)
+[ ] lerp_unclamped(other, t)
+[ ] nlerp(other, t)
+
+
+11. GEOMETRIC / NUMERICAL PREDICATES
+------------------------------------
+
+[ ] is_zero()
+[ ] is_finite()
+[ ] is_nan()
+[ ] is_infinite()
+[ ] approx_eq(other, epsilon)
+[ ] abs_diff_eq(other, epsilon)
+
+
+12. POLAR COORDINATES
+--------------------
+
+[ ] from_polar(radius, angle)
+[ ] to_polar()
+
+
+13. LENGTH UTILITIES
+-------------------
+
+[ ] clamp_length(min, max)
+
+
+14. OPTIONAL CONVENIENCE OPERATIONS
+-----------------------------------
+
+[ ] direction_to(other)
+[ ] mul_add(other, scalar)
+
+
+15. OPTIONAL SWIZZLES
+--------------------
+
+[ ] yx()
+
+
+16. OPTIONAL COMPONENT-WISE MATH
+--------------------------------
+
+[ ] sqrt()
+[ ] exp()
+[ ] ln()
+[ ] log(base)
+[ ] powf(n)
+[ ] sin()
+[ ] cos()
+[ ] tan()
+
+Note: Consider implementing these through a coherent component-wise
+math trait/API rather than adding every scalar function directly to Vec2.
+
+
+17. NUMERIC CASTING
+------------------
+
+[ ] cast::<U>()
+
+Note: Prefer an explicit generic casting mechanism over a collection
+of ad-hoc as_i32(), as_u32(), etc. methods.
+
+
+18. CONSTANTS
+------------
+
+[X] ZERO
+[X] ONE
+[ ] UNIT_X
+[ ] UNIT_Y
+[ ] NEG_UNIT_X
+[ ] NEG_UNIT_Y
+
+
+19. ADVANCED / DESIGN-DEPENDENT FEATURES
+----------------------------------------
+
+[X] from_angle(angle)
+[ ] rotated_by(rotation)
+[ ] project_onto_normal(normal)
+[ ] clamp(min, max)
+
+Note: These depend somewhat on the scalar abstraction and whether
+the crate has dedicated Rotation2 / numeric utility types.
+
+
+20. POINT / VECTOR SEMANTICS
+----------------------------
+
+This section is not necessarily implemented on Vec2 itself, but should
+be considered before the API becomes large.
+
+[ ] Point2 + Vec2 -> Point2
+[ ] Point2 - Vec2 -> Point2
+[ ] Point2 - Point2 -> Vec2
+
+Consider introducing a separate Point2<T> type for geometry so that
+points and vectors cannot be accidentally mixed.
+
+
+21. LIKELY NOT PART OF Vec2
+---------------------------
+
+The following are better represented elsewhere in the crate:
+
+[ ] smoothstep()
+[ ] ease_in()
+[ ] ease_out()
+[ ] slerp()
+[ ] barycentric()
+[ ] line intersection operations
+[ ] triangle operations
+[ ] polygon operations
+[ ] affine transformations
+
+
+RECOMMENDED IMPLEMENTATION ORDER
+================================
+
+Phase 1 — Make Vec2 usable
+--------------------------
+
+[X] Vec2 type
+[X] new(x, y)
+[X] splat(v)
+[X] zero()
+[X] one()
+[ ] unit_x()
+[ ] unit_y()
+[ ] Default
+[X] Clone
+[X] Copy
+[X] Debug
+[X] PartialEq
+[ ] Index<usize>
+[ ] IndexMut<usize>
+[ ] From<[T; 2]>
+[ ] Into<[T; 2]>
+[ ] From<(T, T)>
+[ ] Into<(T, T)>
+
+
+Phase 2 — Arithmetic
+--------------------
+
+[X] Add
+[X] Sub
+[X] Mul<scalar>
+[X] Div<scalar>
+[ ] Neg
+[X] AddAssign
+[X] SubAssign
+[X] MulAssign<scalar>
+[X] DivAssign<scalar>
+
+
+Phase 3 — Fundamental math
+--------------------------
+
+[X] dot(other)
+[X] cross(other)
+[X] length_squared()
+[X] length()
+[X] distance_squared(other)
+[X] distance(other)
+
+
+Phase 4 — Normalization
+-----------------------
+
+[ ] normalize()
+[ ] try_normalize()
+[ ] normalize_or_zero()
+
+
+Phase 5 — 2D geometry
+---------------------
+
+[ ] perp()
+[ ] perp_cw()
+[ ] angle()
+[ ] angle_between(other)
+[ ] signed_angle_to(other)
+[ ] rotate(angle)
+
+
+Phase 6 — Component operations
+-----------------------------
+
+[ ] min(other)
+[ ] max(other)
+[ ] min_element()
+[ ] max_element()
+[ ] abs()
+[ ] signum()
+[ ] floor()
+[ ] ceil()
+[ ] round()
+[ ] trunc()
+[ ] fract()
+
+
+Phase 7 — Vector decomposition
+-----------------------------
+
+[ ] project_onto(other)
+[ ] reject_from(other)
+[ ] component_mul(other)
+[ ] component_div(other)
+[ ] recip()
+
+
+Phase 8 — Geometric operations
+------------------------------
+
+[ ] reflect(normal)
+[ ] refract(normal, eta)
+
+
+Phase 9 — Interpolation
+-----------------------
+
+[ ] lerp(other, t)
+[ ] lerp_unclamped(other, t)
+[ ] nlerp(other, t)
+
+
+Phase 10 — Numerical robustness
+-------------------------------
+
+[ ] is_zero()
+[ ] is_finite()
+[ ] is_nan()
+[ ] is_infinite()
+[ ] approx_eq(other, epsilon)
+[ ] abs_diff_eq(other, epsilon)
+
+
+Phase 11 — Coordinate conversions
+---------------------------------
+
+[X] from_polar(radius, angle)
+[X] to_polar()
+
+
+Phase 12 — Convenience
+----------------------
+
+[ ] clamp_length(min, max)
+[ ] direction_to(other)
+[ ] mul_add(other, scalar)
+[ ] map(f)
+
+
+Phase 13 — Constants / advanced API
+-----------------------------------
+
+[X] ZERO
+[X] ONE
+[ ] UNIT_X
+[ ] UNIT_Y
+[ ] NEG_UNIT_X
+[ ] NEG_UNIT_Y
+[X] from_angle(angle)
+[ ] rotated_by(rotation)
+[ ] project_onto_normal(normal)
+[ ] clamp(min, max)
+
+
+Phase 14 — Optional extensions
+------------------------------
+
+[ ] yx()
+[ ] cast::<U>()
+[ ] sqrt()
+[ ] exp()
+[ ] ln()
+[ ] log(base)
+[ ] powf(n)
+[ ] sin()
+[ ] cos()
+[ ] tan()
+
+
+NOTES
+=====
+
+1. Keep component-wise multiplication/division explicit rather than
+   overloading Vec2 * Vec2 unless you have a very deliberate reason.
+
+2. length_squared() and distance_squared() should exist alongside
+   length() and distance() because avoiding sqrt is frequently useful.
+
+3. For floating-point vectors, approximate equality should be explicit;
+   do not make PartialEq pretend that floating-point equality is
+   approximate.
+
+4. Consider Point2<T> before adding lots of geometry-specific behavior
+   to Vec2. A point represents a location; a vector represents a
+   displacement/direction.
+
+5. Consider a Rotation2 type before adding many rotation-specific
+   methods.
+
+6. Keep scalar functions such as sin/cos/log/etc. behind a coherent
+   component-wise API if you decide to support them.
+
+7. Consider const fn, no_std, generic scalar traits, and SIMD before
+   committing too deeply to the public API. These choices can affect
+   signatures throughout the crate.
