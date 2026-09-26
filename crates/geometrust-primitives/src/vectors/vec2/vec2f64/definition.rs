@@ -59,11 +59,13 @@ impl Vec2F64 {
         Self::UNIT_Y
     }
 
+    /// Create a `Vec2F64` from the given tuple.
     #[inline]
     pub const fn from_tuple(tup: (f64, f64)) -> Self {
         Self::new(tup.0, tup.1)
     }
 
+    /// Create a `Vec2F64` from the first two elements of the given array.
     #[inline]
     pub const fn from_array(arr: [f64; 2]) -> Self {
         Self::new(arr[0], arr[1])
