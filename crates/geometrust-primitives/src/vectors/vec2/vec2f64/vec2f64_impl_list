@@ -13,8 +13,8 @@ Mark completed items by changing "[ ]" to "[X]".
 [X] splat(v)
 [X] zero()
 [X] one()
-[ ] unit_x()
-[ ] unit_y()
+[X] unit_x()
+[X] unit_y()
 [X] from_array([x, y])
 [ ] to_array()
 [X] from_tuple((x, y))
@@ -24,7 +24,7 @@ Mark completed items by changing "[ ]" to "[X]".
 2. RUST TRAITS & BASIC INTEGRATION
 ----------------------------------
 
-[ ] Default
+[X] Default
 [X] Clone
 [X] Copy
 [X] Debug
@@ -191,10 +191,10 @@ of ad-hoc as_i32(), as_u32(), etc. methods.
 
 [X] ZERO
 [X] ONE
-[ ] UNIT_X
-[ ] UNIT_Y
-[ ] NEG_UNIT_X
-[ ] NEG_UNIT_Y
+[X] UNIT_X
+[X] UNIT_Y
+[X] NEG_UNIT_X
+[X] NEG_UNIT_Y
 
 
 19. ADVANCED / DESIGN-DEPENDENT FEATURES

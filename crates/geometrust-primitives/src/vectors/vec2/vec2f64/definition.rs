@@ -1,7 +1,7 @@
 //! Second dimension vector and functions that have to do with creation.
 
 /// A second-dimension vector specialized for 64 bit floating point numbers.
-#[derive(Copy, Clone, Debug, PartialEq)]
+#[derive(Copy, Clone, Debug, PartialEq, Default)]
 pub struct Vec2F64 {
     /// The x component of the vector.
     pub(crate) x: f64,
@@ -14,6 +14,14 @@ impl Vec2F64 {
     pub const ZERO: Self = Self { x: 0.0, y: 0.0 };
     /// A `Vec2F64` with both components being 1.0
     pub const ONE: Self = Self { x: 1.0, y: 1.0 };
+    /// A `Vec2F64` with x component being 1.0 and y component being 0.0
+    pub const UNIT_X: Self = Self { x: 1.0, y: 0.0 };
+    /// A `Vec2F64` with a y component being 1.0 and x component being 0.0
+    pub const UNIT_Y: Self = Self { x: 0.0, y: 1.0 };
+    /// A `Vec2F64` with x component being -1.0 and y component being 0.0
+    pub const NEG_UNIT_X: Self = Self { x: -1.0, y: 0.0 };
+    /// A `Vec2F64` with a y component being 1.0 and x component being 0.0
+    pub const NEG_UNIT_Y: Self = Self { x: 0.0, y: -1.0 };
 
     /// Create vec2 new 2D vector.
     #[inline]
@@ -37,6 +45,18 @@ impl Vec2F64 {
     #[inline]
     pub const fn one() -> Self {
         Self::ONE
+    }
+
+    /// The unit x vector
+    #[inline]
+    pub const fn unit_x() -> Self {
+        Self::UNIT_X
+    }
+
+    /// The unit y vector
+    #[inline]
+    pub const fn unit_y() -> Self {
+        Self::UNIT_Y
     }
 
     #[inline]
