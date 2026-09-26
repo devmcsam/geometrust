@@ -135,3 +135,325 @@ impl DivAssign<f64> for Vec2F64 {
         self.y /= rhs;
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn add_x_adds_to_x_component_only() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.add_x(4.0), Vec2F64::new(6.0, 3.0));
+    }
+
+    #[test]
+    fn add_x_handles_negative_values() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.add_x(-5.0), Vec2F64::new(-3.0, 3.0));
+    }
+
+    #[test]
+    fn add_y_adds_to_y_component_only() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.add_y(4.0), Vec2F64::new(2.0, 7.0));
+    }
+
+    #[test]
+    fn add_y_handles_negative_values() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.add_y(-5.0), Vec2F64::new(2.0, -2.0));
+    }
+
+    #[test]
+    fn scale_x_multiplies_x_component_only() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.scale_x(4.0), Vec2F64::new(8.0, 3.0));
+    }
+
+    #[test]
+    fn scale_x_handles_zero() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.scale_x(0.0), Vec2F64::new(0.0, 3.0));
+    }
+
+    #[test]
+    fn scale_y_multiplies_y_component_only() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.scale_y(4.0), Vec2F64::new(2.0, 12.0));
+    }
+
+    #[test]
+    fn scale_y_handles_zero() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.scale_y(0.0), Vec2F64::new(2.0, 0.0));
+    }
+
+    #[test]
+    fn sub_x_subtracts_from_x_component_only() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.sub_x(4.0), Vec2F64::new(-2.0, 3.0));
+    }
+
+    #[test]
+    fn sub_x_handles_negative_values() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.sub_x(-4.0), Vec2F64::new(6.0, 3.0));
+    }
+
+    #[test]
+    fn sub_y_subtracts_from_y_component_only() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.sub_y(4.0), Vec2F64::new(2.0, -1.0));
+    }
+
+    #[test]
+    fn sub_y_handles_negative_values() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector.sub_y(-4.0), Vec2F64::new(2.0, 7.0));
+    }
+
+    #[test]
+    fn div_x_divides_x_component_only() {
+        let vector = Vec2F64::new(8.0, 3.0);
+
+        assert_eq!(vector.div_x(4.0), Vec2F64::new(2.0, 3.0));
+    }
+
+    #[test]
+    fn div_x_by_zero_follows_f64_semantics() {
+        let vector = Vec2F64::new(8.0, 3.0);
+        let result = vector.div_x(0.0);
+
+        assert_eq!(result.x, f64::INFINITY);
+        assert_eq!(result.y, 3.0);
+    }
+
+    #[test]
+    fn div_y_divides_y_component_only() {
+        let vector = Vec2F64::new(2.0, 8.0);
+
+        assert_eq!(vector.div_y(4.0), Vec2F64::new(2.0, 2.0));
+    }
+
+    #[test]
+    fn div_y_by_zero_follows_f64_semantics() {
+        let vector = Vec2F64::new(2.0, -8.0);
+        let result = vector.div_y(0.0);
+
+        assert_eq!(result.x, 2.0);
+        assert_eq!(result.y, f64::NEG_INFINITY);
+    }
+
+    #[test]
+    fn add_components_adds_each_component() {
+        let a = Vec2F64::new(2.0, 3.0);
+        let b = Vec2F64::new(4.0, 5.0);
+
+        assert_eq!(a.add_components(b), Vec2F64::new(6.0, 8.0));
+    }
+
+    #[test]
+    fn add_components_handles_negative_components() {
+        let a = Vec2F64::new(-2.0, 3.0);
+        let b = Vec2F64::new(4.0, -5.0);
+
+        assert_eq!(a.add_components(b), Vec2F64::new(2.0, -2.0));
+    }
+
+    #[test]
+    fn sub_components_subtracts_each_component() {
+        let a = Vec2F64::new(2.0, 3.0);
+        let b = Vec2F64::new(4.0, 5.0);
+
+        assert_eq!(a.sub_components(b), Vec2F64::new(-2.0, -2.0));
+    }
+
+    #[test]
+    fn sub_components_handles_negative_components() {
+        let a = Vec2F64::new(-2.0, 3.0);
+        let b = Vec2F64::new(4.0, -5.0);
+
+        assert_eq!(a.sub_components(b), Vec2F64::new(-6.0, 8.0));
+    }
+
+    #[test]
+    fn mul_components_multiplies_each_component() {
+        let a = Vec2F64::new(2.0, 3.0);
+        let b = Vec2F64::new(4.0, 5.0);
+
+        assert_eq!(a.mul_components(b), Vec2F64::new(8.0, 15.0));
+    }
+
+    #[test]
+    fn mul_components_handles_zero_and_negative_components() {
+        let a = Vec2F64::new(-2.0, 0.0);
+        let b = Vec2F64::new(4.0, -5.0);
+
+        assert_eq!(a.mul_components(b), Vec2F64::new(-8.0, -0.0));
+    }
+
+    #[test]
+    fn div_components_divides_each_component() {
+        let a = Vec2F64::new(8.0, 15.0);
+        let b = Vec2F64::new(4.0, 5.0);
+
+        assert_eq!(a.div_components(b), Vec2F64::new(2.0, 3.0));
+    }
+
+    #[test]
+    fn div_components_by_zero_follows_f64_semantics() {
+        let a = Vec2F64::new(8.0, -15.0);
+        let b = Vec2F64::new(0.0, 0.0);
+        let result = a.div_components(b);
+
+        assert_eq!(result.x, f64::INFINITY);
+        assert_eq!(result.y, f64::NEG_INFINITY);
+    }
+
+    #[test]
+    fn add_operator_adds_vectors() {
+        let a = Vec2F64::new(1.0, 2.0);
+        let b = Vec2F64::new(3.0, 4.0);
+
+        assert_eq!(a + b, Vec2F64::new(4.0, 6.0));
+    }
+
+    #[test]
+    fn add_operator_handles_negative_components() {
+        let a = Vec2F64::new(-1.0, 2.0);
+        let b = Vec2F64::new(3.0, -4.0);
+
+        assert_eq!(a + b, Vec2F64::new(2.0, -2.0));
+    }
+
+    #[test]
+    fn add_assign_operator_adds_vectors_in_place() {
+        let mut vector = Vec2F64::new(1.0, 2.0);
+
+        vector += Vec2F64::new(3.0, 4.0);
+
+        assert_eq!(vector, Vec2F64::new(4.0, 6.0));
+    }
+
+    #[test]
+    fn add_assign_operator_handles_zero() {
+        let mut vector = Vec2F64::new(1.0, 2.0);
+
+        vector += Vec2F64::zero();
+
+        assert_eq!(vector, Vec2F64::new(1.0, 2.0));
+    }
+
+    #[test]
+    fn sub_operator_subtracts_vectors() {
+        let a = Vec2F64::new(1.0, 2.0);
+        let b = Vec2F64::new(3.0, 4.0);
+
+        assert_eq!(a - b, Vec2F64::new(-2.0, -2.0));
+    }
+
+    #[test]
+    fn sub_operator_handles_negative_components() {
+        let a = Vec2F64::new(-1.0, 2.0);
+        let b = Vec2F64::new(3.0, -4.0);
+
+        assert_eq!(a - b, Vec2F64::new(-4.0, 6.0));
+    }
+
+    #[test]
+    fn sub_assign_operator_subtracts_vectors_in_place() {
+        let mut vector = Vec2F64::new(1.0, 2.0);
+
+        vector -= Vec2F64::new(3.0, 4.0);
+
+        assert_eq!(vector, Vec2F64::new(-2.0, -2.0));
+    }
+
+    #[test]
+    fn sub_assign_operator_handles_zero() {
+        let mut vector = Vec2F64::new(1.0, 2.0);
+
+        vector -= Vec2F64::zero();
+
+        assert_eq!(vector, Vec2F64::new(1.0, 2.0));
+    }
+
+    #[test]
+    fn mul_operator_multiplies_vector_by_scalar() {
+        let vector = Vec2F64::new(2.0, 3.0);
+
+        assert_eq!(vector * 4.0, Vec2F64::new(8.0, 12.0));
+    }
+
+    #[test]
+    fn mul_operator_handles_zero_scalar() {
+        let vector = Vec2F64::new(2.0, -3.0);
+
+        assert_eq!(vector * 0.0, Vec2F64::new(0.0, -0.0));
+    }
+
+    #[test]
+    fn mul_assign_operator_multiplies_vector_by_scalar_in_place() {
+        let mut vector = Vec2F64::new(2.0, 3.0);
+
+        vector *= 4.0;
+
+        assert_eq!(vector, Vec2F64::new(8.0, 12.0));
+    }
+
+    #[test]
+    fn mul_assign_operator_handles_negative_scalar() {
+        let mut vector = Vec2F64::new(2.0, -3.0);
+
+        vector *= -4.0;
+
+        assert_eq!(vector, Vec2F64::new(-8.0, 12.0));
+    }
+
+    #[test]
+    fn div_operator_divides_vector_by_scalar() {
+        let vector = Vec2F64::new(8.0, 12.0);
+
+        assert_eq!(vector / 4.0, Vec2F64::new(2.0, 3.0));
+    }
+
+    #[test]
+    fn div_operator_by_zero_follows_f64_semantics() {
+        let vector = Vec2F64::new(8.0, -12.0);
+        let result = vector / 0.0;
+
+        assert_eq!(result.x, f64::INFINITY);
+        assert_eq!(result.y, f64::NEG_INFINITY);
+    }
+
+    #[test]
+    fn div_assign_operator_divides_vector_by_scalar_in_place() {
+        let mut vector = Vec2F64::new(8.0, 12.0);
+
+        vector /= 4.0;
+
+        assert_eq!(vector, Vec2F64::new(2.0, 3.0));
+    }
+
+    #[test]
+    fn div_assign_operator_by_zero_follows_f64_semantics() {
+        let mut vector = Vec2F64::new(8.0, -12.0);
+
+        vector /= 0.0;
+
+        assert_eq!(vector.x, f64::INFINITY);
+        assert_eq!(vector.y, f64::NEG_INFINITY);
+    }
+}
