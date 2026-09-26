@@ -69,6 +69,18 @@ impl Vec2F64 {
         Self::new(arr[0], arr[1])
     }
 
+    /// Create a tuple from the given `Vec2F64`.
+    #[inline]
+    pub const fn to_tuple(self) -> (f64, f64) {
+        (self.x, self.y)
+    }
+
+    /// Create an array with a length of 2 from the given `Vec2F64`.
+    #[inline]
+    pub const fn to_array(self) -> [f64; 2] {
+        [self.x, self.y]
+    }
+
     /// Create vec2 vector from an angle in radians.
     #[inline]
     pub fn from_angle(theta: f64) -> Self {

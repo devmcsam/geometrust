@@ -16,9 +16,9 @@ Mark completed items by changing "[ ]" to "[X]".
 [X] unit_x()
 [X] unit_y()
 [X] from_array([x, y])
-[ ] to_array()
+[X] to_array()
 [X] from_tuple((x, y))
-[ ] to_tuple((x, y))
+[X] to_tuple((x, y))
 
 
 2. RUST TRAITS & BASIC INTEGRATION
